@@ -1,4 +1,4 @@
-import { sevgiliStore, json } from './_store.mjs';
+import { sevgiliStore, json, withTimeout } from './_store.mjs';
 
 const MAX_BODY_SIZE = 4.2 * 1024 * 1024;
 
@@ -15,9 +15,14 @@ export default async (request) => {
   }
 
   const bodyText = await request.text();
+  const bodyBytes = new TextEncoder().encode(bodyText).length;
 
-  if (!bodyText || new TextEncoder().encode(bodyText).length > MAX_BODY_SIZE) {
-    return json({ ok: false, message: 'Dosya çok büyük. İlk denemede fotoğrafsız kaydet, sonra fotoğrafları tek tek ekle.' }, 413);
+  if (!bodyText || bodyBytes > MAX_BODY_SIZE) {
+    return json({
+      ok: false,
+      message: 'Dosya çok büyük. İlk denemede fotoğrafsız kaydet, sonra fotoğrafları tek tek ekle.',
+      bodyBytes
+    }, 413);
   }
 
   try {
@@ -34,15 +39,15 @@ export default async (request) => {
     };
 
     const store = sevgiliStore();
-    await store.setJSON('site-data', clean);
+    await withTimeout(store.setJSON('site-data', clean), 10000, 'Netlify Blobs 10 saniyede cevap vermedi. Deploy ayarını ve Functions logunu kontrol et.');
 
-    return json({ ok: true, message: 'Kaydedildi.', updatedAt: clean.updatedAt });
+    return json({ ok: true, message: 'Kaydedildi.', updatedAt: clean.updatedAt, bodyBytes });
   } catch (error) {
     return json({
       ok: false,
       message: 'Kaydedilemedi.',
       detail: String(error?.message || error),
-      hint: 'Netlify Function çalışıyor ama Blobs yazamıyor. V3 paketi GitHub repo kök dizinine yüklendiğinden emin ol.'
+      hint: 'V4 pakette token şart değil. Repo köküne yükleyip Clear cache and deploy site yaptıktan sonra tekrar dene.'
     }, 500);
   }
 };

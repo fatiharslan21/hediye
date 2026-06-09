@@ -100,16 +100,20 @@ $('saveButton').addEventListener('click', async () => {
   localStorage.setItem('site-preview-data', JSON.stringify(payload));
 
   try {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 15000);
     const res = await fetch('/api/save-site', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-admin-password': adminPassword },
-      body: JSON.stringify(payload)
+      body: JSON.stringify(payload),
+      signal: controller.signal
     });
+    clearTimeout(timeout);
     const result = await res.json();
     if (!res.ok || !result.ok) throw new Error((result.message || 'Kaydedilemedi') + (result.detail ? ' | Detay: ' + result.detail : '') + (result.hint ? ' | İpucu: ' + result.hint : ''));
     state = payload;
     message.textContent = 'Kaydedildi ✅ Siteyi açınca güncel halini göreceksin.';
   } catch (error) {
-    message.textContent = 'Kaydetme sunucuya gitmedi. Bu tarayıcıda önizleme kaydedildi. Hata: ' + error.message + ' | Not: Fotoğrafları daha küçük seçmeyi veya GitHub üzerinden yeniden deploy etmeyi dene.';
+    message.textContent = 'Kaydetme sunucuya gitmedi. Bu tarayıcıda önizleme kaydedildi. Hata: ' + (error.name === 'AbortError' ? 'İstek 15 saniye bekledi ve zaman aşımına düştü.' : error.message) + ' | Netlify > Functions > saveSite logunu kontrol et.';
   }
 });

@@ -49,3 +49,6 @@ Bu durumda Function çalışıyor ama Netlify Blobs otomatik context alamıyor d
    - İstersen `ADMIN_PASSWORD` = admin şifren
 4. Redeploy yap.
 
+
+## V4 notu
+Bu sürümde Netlify Blobs bağlantısı Function içindeki otomatik Netlify context ile kurulur. `NETLIFY_AUTH_TOKEN` artık zorunlu değildir. Repo kök dizinine yükleyip Netlify'da **Clear cache and deploy site** yapın.

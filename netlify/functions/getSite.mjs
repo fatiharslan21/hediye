@@ -1,4 +1,4 @@
-import { sevgiliStore, json } from './_store.mjs';
+import { sevgiliStore, json, withTimeout } from './_store.mjs';
 
 const fallback = {
   title: 'Bizim Hikayemiz',
@@ -13,7 +13,7 @@ const fallback = {
 export default async () => {
   try {
     const store = sevgiliStore();
-    const data = await store.get('site-data', { type: 'json' });
+    const data = await withTimeout(store.get('site-data', { type: 'json' }), 8000, 'Netlify Blobs okuma zaman aşımı.');
     return json(data || fallback);
   } catch (error) {
     return json({ ...fallback, _warning: String(error?.message || error) });
