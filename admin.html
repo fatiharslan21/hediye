@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Admin Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="admin-body">
+  <main class="admin-shell">
+    <section id="loginBox" class="admin-card">
+      <h1>Admin Girişi</h1>
+      <p>İçeriği değiştirmek için şifreyi gir.</p>
+      <label>Şifre</label>
+      <input id="passwordInput" type="password" placeholder="Şifre" autocomplete="current-password" />
+      <button id="loginButton" type="button">Giriş yap</button>
+      <small class="hint">Varsayılan şifre: emre</small>
+      <p id="loginMessage" class="message"></p>
+    </section>
+
+    <section id="editorBox" class="admin-card editor hidden">
+      <div class="admin-top">
+        <div>
+          <h1>Siteyi Düzenle</h1>
+          <p>Kaydedince herkeste güncel görünür.</p>
+        </div>
+        <a href="index.html" target="_blank">Siteyi aç</a>
+      </div>
+
+      <label>Başlık</label>
+      <input id="titleInput" type="text" maxlength="80" />
+
+      <label>Alt başlık</label>
+      <input id="subtitleInput" type="text" maxlength="160" />
+
+      <label>Tema</label>
+      <select id="themeInput">
+        <option value="green">Yeşil yıldızlı</option>
+        <option value="pink">Pembe romantik</option>
+        <option value="night">Gece modu</option>
+        <option value="cream">Krem sade</option>
+      </select>
+
+      <label class="check-row"><input id="musicInput" type="checkbox" /> Ses efekti açık olsun</label>
+
+      <label>Ana fotoğraf</label>
+      <input id="mainImageInput" type="file" accept="image/*" />
+      <img id="mainPreview" class="admin-preview" alt="Ana fotoğraf önizleme" />
+
+      <div class="grid-inputs">
+        <div><label>Fotoğraf 1</label><input class="galleryInput" data-index="0" type="file" accept="image/*"><img id="preview0" class="admin-preview" alt=""></div>
+        <div><label>Fotoğraf 2</label><input class="galleryInput" data-index="1" type="file" accept="image/*"><img id="preview1" class="admin-preview" alt=""></div>
+        <div><label>Fotoğraf 3</label><input class="galleryInput" data-index="2" type="file" accept="image/*"><img id="preview2" class="admin-preview" alt=""></div>
+        <div><label>Fotoğraf 4</label><input class="galleryInput" data-index="3" type="file" accept="image/*"><img id="preview3" class="admin-preview" alt=""></div>
+      </div>
+
+      <label>Alttaki uzun yazı</label>
+      <textarea id="letterInput" rows="10" maxlength="8000"></textarea>
+
+      <button id="saveButton" type="button">Kaydet</button>
+      <p id="saveMessage" class="message"></p>
+    </section>
+  </main>
+
+  <script src="admin.js"></script>
+</body>
+</html>

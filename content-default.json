@@ -1,0 +1,9 @@
+{
+  "title": "Bizim Hikayemiz",
+  "subtitle": "Seninle her an biraz daha güzel",
+  "mainImage": "",
+  "gallery": ["", "", "", ""],
+  "letter": "Buraya ona yazmak istediğin uzun yazıyı admin panelinden girebilirsin. Satır satır yazabilir, emoji ekleyebilir ve istediğin zaman değiştirebilirsin.",
+  "theme": "green",
+  "musicEnabled": true
+}

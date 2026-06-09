@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#10a817" />
+  <title>Bizim Hikayemiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@700;800&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="sparkles" aria-hidden="true"></div>
+
+  <main class="page shell">
+    <section class="hero card">
+      <p class="eyebrow">özel bir sayfa</p>
+      <h1 id="title">Bizim Hikayemiz</h1>
+      <p id="subtitle" class="subtitle">Seninle her an biraz daha güzel</p>
+
+      <div class="main-photo-wrap">
+        <img id="mainImage" class="main-photo" alt="Ana fotoğraf" />
+        <div id="mainPlaceholder" class="photo-placeholder">Ana fotoğraf</div>
+      </div>
+
+      <button id="soundButton" class="sound-button" type="button"> sesi aç ✨</button>
+    </section>
+
+    <section class="gallery" aria-label="Anı fotoğrafları">
+      <article class="mini-photo"><img id="gallery0" alt="Anı 1"><span>anı 1</span></article>
+      <article class="mini-photo"><img id="gallery1" alt="Anı 2"><span>anı 2</span></article>
+      <article class="mini-photo"><img id="gallery2" alt="Anı 3"><span>anı 3</span></article>
+      <article class="mini-photo"><img id="gallery3" alt="Anı 4"><span>anı 4</span></article>
+    </section>
+
+    <section class="letter card">
+      <h2>Kalbimden</h2>
+      <p id="letterText"></p>
+    </section>
+  </main>
+
+  <a class="admin-link" href="admin.html" aria-label="Admin panel">♡</a>
+  <script src="script.js"></script>
+</body>
+</html>
